@@ -290,7 +290,7 @@ Note, there are no "comments" in the system. Comments are just strings we don't 
 Then we can add interpolation into the template, by referencing terms wrapped in colons:
 
 ```
-write |:hello-world:|
+write |:hello-world|
 ```
 
 That is compiled into:
@@ -316,59 +316,15 @@ That is compiled into:
 A more robust example might be:
 
 ```
-moon |The moon has a period of roughly :days: days.|
+moon |The moon has a period of roughly :bold(|28 days|).|
 ```
 
-```json
-{
-  "type": "term",
-  "name": "moon",
-  "children": [
-    {
-      "type": "template",
-      "children": [
-        {
-          "type": "string",
-          "name": "The moon has a period of roughly "
-        },
-        {
-          "type": "term",
-          "name": "days"
-        },
-        {
-          "type": "string",
-          "name": " days"
-        }
-      ]
-    }
-  ]
-}
-```
-
-You can also do complex inline terms or multiline nested terms.
-
-```
-i |
-  am a :
-    complex
-      nested mutiline-term
-  :
-|
-
-and |I am a :complex inline-term:|
-```
+The expression needs to be simple enough you can tell where it starts and end, otherwise it needs to be placed outside of the template.
 
 Note though, you can still use the colon symbols in regular text without ambiguity, you just need to prefix them with backslashes.
 
 ```
 i |am \:colons\: included in the actual string|
-```
-
-If the code is simple enough, you can just use 1 colon, as long as it is clear what the end is from context:
-
-```
-text |I am :code(|text|)|
-text |There are :size days a year|
 ```
 
 #### Codes
